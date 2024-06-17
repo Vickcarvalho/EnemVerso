@@ -1,132 +1,34 @@
-function drawGrafico1 () {
+import { createGraphics } from "./createGraphics.js"
 
-  var chartDom = document.getElementById('grafico_3b');
-  var myChart = echarts.init(chartDom);
-  var option;
+async function setGraphics ({ graph_3a, graph_3b, graph_tads }) {
 
-  option = {
-    title: {
-      text: 'Basic Radar Chart'
-    },
-    legend: {
-      data: ['Allocated Budget', 'Actual Spending']
-    },
-    radar: {
-      // shape: 'circle',
-      indicator: [
-        { name: 'Sales', max: 6500 },
-        { name: 'Administration', max: 16000 },
-        { name: 'Information Technology', max: 30000 },
-        { name: 'Customer Support', max: 38000 },
-        { name: 'Development', max: 52000 },
-        { name: 'Marketing', max: 25000 }
-      ]
-    },
-    series: [
-      {
-        name: 'Budget vs spending',
-        type: 'radar',
-        data: [
-          {
-            value: [4200, 3000, 20000, 35000, 50000, 18000],
-            name: 'Allocated Budget'
-          }
-        ]
-      }
-    ]
-  };
+    const div1 = document.getElementById('grafico_3b')
+    const div2 = document.getElementById('grafico_3a')
+    const div3 = document.getElementById('grafico_tads')
 
-  option && myChart.setOption(option);
+    const graph1 = echarts.init(div1)
+    const graph2 = echarts.init(div2)
+    const graph3 = echarts.init(div3)
 
-  
-}
-
-function drawGrafico2 () {
-
-  var chartDom = document.getElementById('grafico_3a');
-  var myChart = echarts.init(chartDom);
-  var option;
-
-  option = {
-    title: {
-      text: 'Basic Radar Chart'
-    },
-    legend: {
-      data: ['Allocated Budget', 'Actual Spending']
-    },
-    radar: {
-      // shape: 'circle',
-      indicator: [
-        { name: 'Sales', max: 6500 },
-        { name: 'Administration', max: 16000 },
-        { name: 'Information Technology', max: 30000 },
-        { name: 'Customer Support', max: 38000 },
-        { name: 'Development', max: 52000 },
-        { name: 'Marketing', max: 25000 }
-      ]
-    },
-    series: [
-      {
-        name: 'Budget vs spending',
-        type: 'radar',
-        data: [
-          {
-            value: [4200, 3000, 20000, 35000, 50000, 18000],
-            name: 'Allocated Budget'
-          }
-        ]
-      }
-    ]
-  };
-
-  option && myChart.setOption(option);
-
+    graph1.setOption(graph_3b)
+    graph2.setOption(graph_3a)
+    graph3.setOption(graph_tads)
 
 }
 
-function drawGrafico3 () {
+await setGraphics(await createGraphics('linguaPortuguesa'))
 
-  var chartDom = document.getElementById('grafico_tads');
-  var myChart = echarts.init(chartDom);
-  var option;
+const subButtons = document.getElementsByClassName('subject')
+for (let b = 0; b < subButtons.length; b++) {
 
-  option = {
-    title: {
-      text: 'Basic Radar Chart'
-    },
-    legend: {
-      data: ['Allocated Budget', 'Actual Spending']
-    },
-    radar: {
-      // shape: 'circle',
-      indicator: [
-        { name: 'Sales', max: 6500 },
-        { name: 'Administration', max: 16000 },
-        { name: 'Information Technology', max: 30000 },
-        { name: 'Customer Support', max: 38000 },
-        { name: 'Development', max: 52000 },
-        { name: 'Marketing', max: 25000 }
-      ]
-    },
-    series: [
-      {
-        name: 'Budget vs spending',
-        type: 'radar',
-        data: [
-          {
-            value: [4200, 3000, 20000, 35000, 50000, 18000],
-            name: 'Allocated Budget'
-          }
-        ]
-      }
-    ]
-  };
+    subButtons.item(b).addEventListener('click', async (event) => {
 
-  option && myChart.setOption(option);
+        const subject = document.getElementById('subject')
+        subject.innerHTML = event.target.innerHTML
 
+        const buttonId = event.target.id
+        setGraphics(await createGraphics(buttonId))
+
+    })
 
 }
-
-drawGrafico1()
-drawGrafico2()
-drawGrafico3()
